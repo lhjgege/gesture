@@ -4,6 +4,8 @@ plugins {
     id("maven-publish")
 }
 
+group="com.github.lhjgege"
+
 android {
     namespace = "com.lhj.gesture"
     compileSdk = 34
