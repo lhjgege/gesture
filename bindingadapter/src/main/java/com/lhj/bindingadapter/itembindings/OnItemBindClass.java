@@ -3,12 +3,13 @@ package com.lhj.bindingadapter.itembindings;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
+import com.lhj.bindingadapter.BindingListViewAdapter;
+import com.lhj.bindingadapter.ItemBinding;
+import com.lhj.bindingadapter.OnItemBind;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import me.tatarka.bindingcollectionadapter2.BindingListViewAdapter;
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
-import me.tatarka.bindingcollectionadapter2.OnItemBind;
 
 /**
  * An {@link OnItemBind} that selects an item view based on the class of the given item.
