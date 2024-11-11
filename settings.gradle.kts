@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Gesture"
 include(":app")
 include(":gesture")
+include(":bindingadapter")

@@ -1,16 +1,10 @@
-import com.android.build.gradle.internal.packaging.fromProjectProperties
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
 }
 
-group="com.github.lhjgege"
-version="1.0.0"
-
 android {
-    namespace = "com.lhj.gesture"
+    namespace = "com.lhj.bindingadapter"
     compileSdk = 34
 
     defaultConfig {
@@ -30,11 +24,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "11"
+    }
+    buildFeatures {
+        dataBinding = true
     }
 }
 
