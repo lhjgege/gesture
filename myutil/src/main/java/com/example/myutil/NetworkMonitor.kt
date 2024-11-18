@@ -6,6 +6,9 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 
+/**
+ * 检测是否有网络
+ */
 class NetworkMonitor private constructor(context: Context) {
 
     private val connectivityManager =
