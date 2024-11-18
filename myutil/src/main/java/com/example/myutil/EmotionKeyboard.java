@@ -1,4 +1,4 @@
-package com.example.gesture;
+package com.example.myutil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,6 +21,9 @@ import androidx.annotation.NonNull;
 
 import java.util.HashMap;
 
+/**
+ * 切换表情键盘和软键盘
+ */
 public class EmotionKeyboard {
     private static final String SHARE_PREFERENCE_NAME = "EmotionKeyboard"; // 存储表情键盘相关信息的SharedPreferences名称
     private static final String SHARE_PREFERENCE_SOFT_INPUT_HEIGHT = "soft_input_height"; // 软键盘高度在SharedPreferences中的key

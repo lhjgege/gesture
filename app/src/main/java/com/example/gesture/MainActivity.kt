@@ -2,10 +2,12 @@ package com.example.gesture
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.myutil.toEditToKeyBoardBottom
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // 使用EmotionKeyboard.with()方法获取EmotionKeyboard的实例，并进行绑定操作
+        /*// 使用EmotionKeyboard.with()方法获取EmotionKeyboard的实例，并进行绑定操作
         EmotionKeyboard.with(this)
             .bindToEditText(findViewById(R.id.chat_box)) // 绑定编辑框
             .setButtonView(findViewById(R.id.bt_emoji), findViewById(R.id.bt_menu))//设置按钮
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             .bindToMenuButton() // 绑定菜单按钮
             .setMenuView(findViewById(R.id.menu_paper)) // 设置菜单布局
             .bindToContent(findViewById(R.id.chat_frame)) // 绑定内容布局
-            .build() // 构建EmotionKeyboard实例
+            .build() // 构建EmotionKeyboard实例*/
+
+
+        val edit = findViewById<LinearLayout>(R.id.bottom_bar)
+        edit.toEditToKeyBoardBottom(this)
     }
 }
