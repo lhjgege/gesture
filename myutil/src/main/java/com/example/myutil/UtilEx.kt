@@ -1,27 +1,17 @@
 package com.example.myutil
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Rect
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.view.Window
 import androidx.annotation.ColorInt
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlin.math.abs
 
 
 /**
@@ -75,94 +65,6 @@ fun TabLayout.toTabLayoutMediator(
     TabLayoutMediator(this, vp, autoRefresh, smoothScroll) { tab, pos ->
         callback.invoke(tab, pos)
     }.attach()
-}
-
-/**
- * 设置包含EditText父布局在软键盘弹出自动在软键盘上面
- */
-private val mKeyboardViewPadding = mutableMapOf<String, Int>()
-fun View.toEditToKeyBoardBottom(act: AppCompatActivity) {
-    val onb = OnGlobalLayoutListener {
-        val heightDiff: Int = getDecorViewInvisibleHeight(act.window)
-        if (heightDiff > 0) {
-            this@toEditToKeyBoardBottom.setPadding(
-                mKeyboardViewPadding["left"] ?: 0,
-                mKeyboardViewPadding["top"] ?: 0,
-                mKeyboardViewPadding["right"] ?: 0,
-                (mKeyboardViewPadding["bottom"] ?: 0).plus(
-                    if (getStatusBarHeight() > 0) heightDiff.minus(
-                        getStatusBarHeight()
-                    ) else getStatusBarHeight()
-                )
-            )
-        } else {
-            this@toEditToKeyBoardBottom.setPadding(
-                mKeyboardViewPadding["left"] ?: 0,
-                mKeyboardViewPadding["top"] ?: 0,
-                mKeyboardViewPadding["right"] ?: 0,
-                mKeyboardViewPadding["bottom"] ?: 0
-            )
-        }
-    }
-
-    mKeyboardViewPadding["top"] = this.paddingTop
-    mKeyboardViewPadding["left"] = this.paddingLeft
-    mKeyboardViewPadding["right"] = this.paddingRight
-    mKeyboardViewPadding["bottom"] = this.paddingBottom
-    this@toEditToKeyBoardBottom.viewTreeObserver.addOnGlobalLayoutListener(onb)
-    act.lifecycle.addObserver(object : DefaultLifecycleObserver {
-        override fun onDestroy(owner: LifecycleOwner) {
-            super.onDestroy(owner)
-            mKeyboardViewPadding.clear()
-            this@toEditToKeyBoardBottom.viewTreeObserver.removeOnGlobalLayoutListener(onb)
-        }
-    })
-}
-
-/**
- * 获取软键盘的高度
- *
- * @return 软键盘高度
- */
-private fun getDecorViewInvisibleHeight(window: Window): Int {
-    val decorView = window.decorView
-    val outRect = Rect()
-    var sDecorViewDelta = 0
-    decorView.getWindowVisibleDisplayFrame(outRect)
-    Log.d(
-        "KeyboardUtils",
-        "getDecorViewInvisibleHeight: " + (decorView.bottom - outRect.bottom)
-    )
-    val delta = abs((decorView.bottom - outRect.bottom).toDouble()).toInt()
-    if (delta <= getNavBarHeight() + getStatusBarHeight()) {
-        sDecorViewDelta = delta
-        return 0
-    }
-    return delta - sDecorViewDelta
-}
-
-/**
- * 获取StatusBarHeight 高度
- */
-@SuppressLint("DiscouragedApi")
-fun getStatusBarHeight(): Int {
-    val resources = Resources.getSystem()
-    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-    return resources.getDimensionPixelSize(resourceId)
-}
-
-/**
- * 获取底部NavBarHeight 高度
- */
-@SuppressLint("DiscouragedApi")
-private fun getNavBarHeight(): Int {
-    val res = Resources.getSystem()
-    val resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (resourceId != 0) {
-        res.getDimensionPixelSize(resourceId)
-    } else {
-        0
-    }
 }
 
 /**
