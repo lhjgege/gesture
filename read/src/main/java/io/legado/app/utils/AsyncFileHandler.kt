@@ -1,6 +1,5 @@
 package io.legado.app.utils
 
-import io.legado.app.help.globalExecutor
 import java.util.logging.FileHandler
 import java.util.logging.LogRecord
 
